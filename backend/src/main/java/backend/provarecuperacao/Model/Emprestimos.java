@@ -1,7 +1,10 @@
 package backend.provarecuperacao.Model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 
 @Entity
 @Table(name = "emprestimos")
@@ -11,6 +14,8 @@ public class Emprestimos implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long emprestimoId;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd" , timezone = "GMT+8")
+    private Date data;
 
     @ManyToOne
     @JoinColumn(name = "exemplar_id")
@@ -37,6 +42,14 @@ public class Emprestimos implements Serializable {
         this.emprestimoId = emprestimoId;
     }
 
+    public Date getData() {
+        return data;
+    }
+
+    public void setData(Date data) {
+        this.data = data;
+    }
+
     public Exemplares getExemplar() {
         return exemplar;
     }
@@ -49,7 +62,4 @@ public class Emprestimos implements Serializable {
         return usuario;
     }
 
-    public void setUsuario(Usuarios usuario) {
-        this.usuario = usuario;
-    }
 }
