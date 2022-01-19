@@ -12,7 +12,6 @@ public class Exemplares implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long exemplaresId;
     private int quantidade;
-    private boolean disponibilidade;
 
     @ManyToOne
     @JoinColumn(name = "livro_id")
@@ -24,7 +23,6 @@ public class Exemplares implements Serializable {
     public Exemplares(Long exemplaresId, int quantidade, boolean disponibilidade, Livros livro) {
         this.exemplaresId = exemplaresId;
         this.quantidade = quantidade;
-        this.disponibilidade = disponibilidade;
         this.livro = livro;
     }
 
@@ -44,19 +42,9 @@ public class Exemplares implements Serializable {
         this.quantidade = quantidade;
     }
 
-    public boolean isDisponibilidade() {
-        return disponibilidade;
-    }
-
-    public void setDisponibilidade(boolean disponibilidade) {
-        this.disponibilidade = disponibilidade;
-    }
 
     public Livros getLivro() {
         return livro;
     }
 
-    public void setLivro(Livros livro) {
-        this.livro = livro;
-    }
 }
