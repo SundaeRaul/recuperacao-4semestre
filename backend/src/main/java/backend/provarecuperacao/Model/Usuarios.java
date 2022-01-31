@@ -24,13 +24,13 @@ public class Usuarios implements Serializable {
     private String num;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "usuarios", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     private List<Emprestimos> emprestimos = new ArrayList<>();
 
     public Usuarios() {
     }
 
-    public Usuarios(Long usuarioId, String usuarioNome, String rg, String cpf, String email, String endereco_url, String complemento, String num, List<Emprestimos> emprestimos) {
+    public Usuarios(Long usuarioId, String usuarioNome, String rg, String cpf, String email, String endereco_url, String complemento, String num) {
         this.usuarioId = usuarioId;
         this.usuarioNome = usuarioNome;
         this.rg = rg;
@@ -39,7 +39,6 @@ public class Usuarios implements Serializable {
         this.endereco_url = endereco_url;
         this.complemento = complemento;
         this.num = num;
-        this.emprestimos = emprestimos;
     }
 
     public Long getUsuarioId() {

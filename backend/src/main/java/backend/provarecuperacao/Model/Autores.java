@@ -18,16 +18,15 @@ public class Autores implements Serializable {
     private String autorNome;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "autores", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "autor", cascade = CascadeType.ALL)
     private List<Livros> livros_autores = new ArrayList<>();
 
     public Autores() {
     }
 
-    public Autores(Long autorId, String autorNome, List<Livros> livros_autores) {
+    public Autores(Long autorId, String autorNome) {
         this.autorId = autorId;
         this.autorNome = autorNome;
-        this.livros_autores = livros_autores;
     }
 
     public Long getAutorId() {

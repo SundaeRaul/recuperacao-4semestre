@@ -1,9 +1,11 @@
 package backend.provarecuperacao.Model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.Calendar;
 import java.util.Date;
 
 @Entity
@@ -14,12 +16,14 @@ public class Emprestimos implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long emprestimoId;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd" , timezone = "GMT+8")
-    private Date data;
+
+    private LocalDate data;
+
+    private LocalDate dataLimite;
 
     @ManyToOne
-    @JoinColumn(name = "exemplar_id")
-    private Exemplares exemplar;
+    @JoinColumn(name = "livro_id")
+    private Livros livro;
 
     @ManyToOne
     @JoinColumn(name = "usuario_id")
@@ -28,9 +32,17 @@ public class Emprestimos implements Serializable {
     public Emprestimos() {
     }
 
-    public Emprestimos(Long emprestimoId, Exemplares exemplar, Usuarios usuario) {
+    public Emprestimos(Long emprestimoId, Livros livro, Usuarios usuario) {
         this.emprestimoId = emprestimoId;
-        this.exemplar = exemplar;
+        this.livro = livro;
+        this.usuario = usuario;
+    }
+
+    public Emprestimos(Long emprestimoId, LocalDate data, LocalDate dataLimite, Livros livro, Usuarios usuario) {
+        this.emprestimoId = emprestimoId;
+        this.data = data;
+        this.dataLimite = dataLimite;
+        this.livro = livro;
         this.usuario = usuario;
     }
 
@@ -42,20 +54,28 @@ public class Emprestimos implements Serializable {
         this.emprestimoId = emprestimoId;
     }
 
-    public Date getData() {
+    public LocalDate getData() {
         return data;
     }
 
-    public void setData(Date data) {
+    public void setData(LocalDate data) {
         this.data = data;
     }
 
-    public Exemplares getExemplar() {
-        return exemplar;
+    public LocalDate getDataLimite() {
+        return dataLimite;
     }
 
-    public void setExemplar(Exemplares exemplar) {
-        this.exemplar = exemplar;
+    public void setDataLimite(LocalDate dataLimite) {
+        this.dataLimite = dataLimite;
+    }
+
+    public Livros getLivro() {
+        return livro;
+    }
+
+    public void setLivro(Livros livro) {
+        this.livro = livro;
     }
 
     public Usuarios getUsuario() {

@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -16,33 +15,35 @@ public class Livros implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long livroId;
     private String livroNome;
+    private int exemplares;
 
     @ManyToOne
-    @JoinColumn(name = "categoria_id")
     private Categorias categoria;
 
     @ManyToOne
-    @JoinColumn(name = "autor_id")
+    @JoinColumn(name = "autor")
     private Autores autor;
 
     @ManyToOne
-    @JoinColumn(name = "editora_id")
+    @JoinColumn(name = "editora")
     private Editoras editora;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "livros", cascade = CascadeType.ALL)
-    private List<Exemplares> exemplares_livros = new ArrayList<>();
+    @OneToMany(mappedBy = "livro", cascade = CascadeType.ALL)
+    private List<Emprestimos> emprestimos_livro;
+
+
 
     public Livros() {
     }
 
-    public Livros(Long livroId, String livroNome, Categorias categoria, Autores autor, Editoras editora, List<Exemplares> exemplares_livros) {
+    public Livros(Long livroId, String livroNome, int exemplares, Categorias categoria, Autores autor, Editoras editora) {
         this.livroId = livroId;
         this.livroNome = livroNome;
+        this.exemplares = exemplares;
         this.categoria = categoria;
         this.autor = autor;
         this.editora = editora;
-        this.exemplares_livros = exemplares_livros;
     }
 
     public Long getLivroId() {
@@ -59,6 +60,14 @@ public class Livros implements Serializable {
 
     public void setLivroNome(String livroNome) {
         this.livroNome = livroNome;
+    }
+
+    public int getExemplares() {
+        return exemplares;
+    }
+
+    public void setExemplares(int exemplares) {
+        this.exemplares = exemplares;
     }
 
     public Categorias getCategoria() {
@@ -85,7 +94,8 @@ public class Livros implements Serializable {
         this.editora = editora;
     }
 
-    public List<Exemplares> getExemplares_livros() {
-        return exemplares_livros;
+    public List<Emprestimos> getEmprestimos_livro() {
+        return emprestimos_livro;
     }
+
 }

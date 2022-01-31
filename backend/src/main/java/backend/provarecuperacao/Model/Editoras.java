@@ -18,16 +18,15 @@ public class Editoras implements Serializable {
     private String editoraNome;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "editoras", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "editora", cascade = CascadeType.ALL)
     private List<Livros> livros_editoras = new ArrayList<>();
 
     public Editoras() {
     }
 
-    public Editoras(Long editoraId, String editoraNome, List<Livros> livros_editoras) {
+    public Editoras(Long editoraId, String editoraNome) {
         this.editoraId = editoraId;
         this.editoraNome = editoraNome;
-        this.livros_editoras = livros_editoras;
     }
 
     public Long getEditoraId() {

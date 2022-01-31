@@ -17,20 +17,19 @@ public class Categorias implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long categoriaId;
     private String categoriaNome;
-    private int limiteEmprestimo;
+    private Long limiteEmprestimo;
 
 
     @JsonIgnore
-    @OneToMany(mappedBy = "categorias", cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Livros> livros_categorias = new ArrayList<>();
 
     public Categorias() {
     }
 
-    public Categorias(Long categoriaId, String categoriaNome, int limiteEmprestimo , List<Livros> livros_categorias) {
+    public Categorias(Long categoriaId, String categoriaNome, long limiteEmprestimo) {
         this.categoriaId = categoriaId;
         this.categoriaNome = categoriaNome;
-        this.livros_categorias = livros_categorias;
         this.limiteEmprestimo = limiteEmprestimo;
     }
 
@@ -50,11 +49,11 @@ public class Categorias implements Serializable {
         this.categoriaNome = categoriaNome;
     }
 
-    public int getLimiteEmprestimo() {
+    public Long getLimiteEmprestimo() {
         return limiteEmprestimo;
     }
 
-    public void setLimiteEmprestimo(int limiteEmprestimo) {
+    public void setLimiteEmprestimo(Long limiteEmprestimo) {
         this.limiteEmprestimo = limiteEmprestimo;
     }
 

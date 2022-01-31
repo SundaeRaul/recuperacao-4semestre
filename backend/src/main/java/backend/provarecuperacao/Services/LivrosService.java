@@ -43,4 +43,11 @@ public class LivrosService {
         entity.setEditora(obj.getEditora());
         entity.setLivroNome(obj.getLivroNome());
     }
+
+    public int diminuiQtdLivro(Livros livro){
+        int obj = livro.getExemplares();
+        obj = obj - 1;
+        livro.setExemplares(obj);
+        return obj;
+    }
 }

@@ -39,5 +39,7 @@ public class CategoriasService {
 
     private void UpdateData(Categorias entity, Categorias obj) {
         entity.setCategoriaNome(obj.getCategoriaNome());
+        entity.setLimiteEmprestimo(obj.getLimiteEmprestimo());
+
     }
 }
