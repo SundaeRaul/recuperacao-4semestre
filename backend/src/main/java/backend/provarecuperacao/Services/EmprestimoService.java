@@ -37,6 +37,12 @@ public class EmprestimoService {
         return emprep.save(emprestimos);
     }
 
+    public void DeletaEmprestimo(Long emprestimoId) {
+        Emprestimos emprestimo = emprep.getById(emprestimoId);
+        aumentaQtt(emprestimo.getLivro().getLivroId());
+        emprep.deleteById(emprestimoId);
+    }
+
     public Livros diminuiQtt(Long livroId) {
       Livros livro = livrosRepository.getById(livroId);
       livro.setExemplares(livrosService.diminuiQtdLivro(livro));
@@ -44,8 +50,11 @@ public class EmprestimoService {
       return livro;
     }
 
-    public void DeletaEmprestimo(Long emprestimoId) {
-        emprep.deleteById(emprestimoId);
+    public Livros aumentaQtt(Long livroId) {
+        Livros livro = livrosRepository.getById(livroId);
+        livro.setExemplares(livrosService.aumentaQttLivro(livro));
+        livrosRepository.save(livro);
+        return livro;
     }
 
 }

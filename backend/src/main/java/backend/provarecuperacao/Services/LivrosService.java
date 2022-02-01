@@ -50,4 +50,11 @@ public class LivrosService {
         livro.setExemplares(obj);
         return obj;
     }
+
+    public int aumentaQttLivro(Livros livro) {
+        int obj = livro.getExemplares();
+        obj = obj + 1;
+        livro.setExemplares(obj);
+        return obj;
+    }
 }
