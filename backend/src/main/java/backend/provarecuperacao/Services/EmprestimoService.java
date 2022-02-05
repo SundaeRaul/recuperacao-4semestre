@@ -7,6 +7,7 @@ import backend.provarecuperacao.Repository.LivrosRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
@@ -33,7 +34,14 @@ public class EmprestimoService {
     }
 
     public Emprestimos CadastraEmprestimo(Emprestimos emprestimos) {
+        Livros livro = livrosRepository.getById(emprestimos.getLivro().getLivroId());
+        if(livro.getExemplares() <= 0){
+            throw new RuntimeException("Este livro não está disponível");
+        }
         diminuiQtt(emprestimos.getLivro().getLivroId());
+        Livros livroemprestimo = livrosRepository.getById(emprestimos.getLivro().getLivroId());
+        emprestimos.setData(LocalDate.now());
+        emprestimos.setDataLimite(LocalDate.now().plusDays(livroemprestimo.getCategoria().getLimiteEmprestimo()));
         return emprep.save(emprestimos);
     }
 
