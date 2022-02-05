@@ -4,6 +4,8 @@ import { useEffect } from 'react';
 import { useCallback, useState } from 'react/cjs/react.development';
 import Navbar from '../Components/Navbar';
 import CriaCategoria from '../Components/CriaCategoria';
+import CriaEditora from '../Components/CriaEditora';
+import CriaAutor from '../Components/CriaAutor';
 
 const CriaLivroWrapper = styled.div`
 width: 78%;
@@ -41,6 +43,8 @@ function CriaLivro(){
     const [exemplares, setExemplares] = useState(null);
 
     const [modalCriaCategoria, setModalCriaCategoria] = useState(false);
+    const [modalCriaEditora, setModalCriaEditora] = useState(false);
+    const [modalCriaAutor, setModalCriaAutor] = useState(false);
 
     useEffect(() => {
         async function getCategorias() {
@@ -105,8 +109,8 @@ function CriaLivro(){
                         <option key={cat.categoriaId} value={cat.categoriaId}>{cat.categoriaNome}</option>
                       ))}
                     </select>
+                    <button type='button' onClick={(e) => setModalCriaCategoria(!modalCriaCategoria)}>Ou criar nova categoria</button>
                   </div>
-                  <button type='button' onClick={(e) => setModalCriaCategoria(!modalCriaCategoria)}>Ou criar nova categoria</button>
                   <div className="editora">
                     <select onChange={(e) => setEditoraEscolhida(e.target.value)} value={editoraEscolhida}>
                       <option value='default'>nenhuma</option>
@@ -114,6 +118,7 @@ function CriaLivro(){
                         <option key={ed.editoraId} value={ed.editoraId}>{ed.editoraNome}</option>
                       ))}
                     </select>
+                    <button type='button' onClick={(e) => setModalCriaEditora(!modalCriaEditora)}>Ou criar nova editora</button>
                   </div>
                   <div className="autor">
                     <select onChange={(e) => setAutorEscolhido(e.target.value)} value={autorEscolhido}>
@@ -122,6 +127,7 @@ function CriaLivro(){
                         <option key={aut.autorId} value={aut.autorId}>{aut.autorNome}</option> 
                       ))}
                     </select>
+                    <button type='button' onClick={(e) => setModalCriaAutor(!modalCriaAutor)}>Ou criar novo autor</button>
                   </div>
                   <button type='submit'>Criar Livro</button>
               </form>
@@ -129,6 +135,18 @@ function CriaLivro(){
               {modalCriaCategoria ?
                 <CriaCategoria />
                : 
+                <div></div>
+              }
+
+              {modalCriaEditora ? 
+                <CriaEditora />
+                :
+                <div></div>
+              }
+
+              {modalCriaAutor ? 
+                <CriaAutor />
+                :
                 <div></div>
               }
           </CriaLivroWrapper>

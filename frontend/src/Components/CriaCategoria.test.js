@@ -25,5 +25,7 @@ test("Deve chamar a api", () => {
 
     expect(inputNome).toBeInTheDocument();
     expect(inputLimite).toBeInTheDocument();
+    expect(inputNome.value).toBe("qwe12");
+    expect(inputLimite.value).toBe("2");
     expect(axios.post).toHaveBeenCalled();
 })
